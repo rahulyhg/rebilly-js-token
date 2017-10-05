@@ -259,14 +259,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#define-the-callback" title="Define the callback" class="md-nav__link">
-    Define the callback
+  <a href="#defining-the-callback" title="Defining the callback" class="md-nav__link">
+    Defining the callback
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-endpoint" title="Changing the endpoint" class="md-nav__link">
+    Changing the endpoint
+  </a>
   
 </li>
       
@@ -372,14 +379,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#define-the-callback" title="Define the callback" class="md-nav__link">
-    Define the callback
+  <a href="#defining-the-callback" title="Defining the callback" class="md-nav__link">
+    Defining the callback
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-endpoint" title="Changing the endpoint" class="md-nav__link">
+    Changing the endpoint
+  </a>
   
 </li>
       
@@ -482,7 +496,7 @@
 <span class="p">};</span>
 <span class="nx">Rebilly</span><span class="p">.</span><span class="nx">createToken</span><span class="p">(</span><span class="nx">payload</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </pre></div></p>
-<h3 id="define-the-callback">Define the callback<a class="headerlink" href="#define-the-callback" title="Permanent link">&para;</a></h3>
+<h3 id="defining-the-callback">Defining the callback<a class="headerlink" href="#defining-the-callback" title="Permanent link">&para;</a></h3>
 <p>The callback function should be used to inject the token returned by the API into your form. Once submitted, use the value in conjunction with one of the server-side SDKs to create the customer.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// the token is returned as response.data.id</span>
 <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
@@ -499,8 +513,8 @@
 <span class="nx">Rebilly</span><span class="p">.</span><span class="nx">createToken</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </pre></div>
 
-<p><strong>Callback Argument</strong>
-The argument received by the callback contains additional information on the API request and can be used to detect validation errors.</p>
+<p><strong>Callback Argument</strong></p>
+<p>The argument received by the callback contains additional information on the API request and can be used to detect validation errors.</p>
 <table>
 <thead>
 <tr>
@@ -537,6 +551,12 @@ The argument received by the callback contains additional information on the API
 </tr>
 </tbody>
 </table>
+<h2 id="changing-the-endpoint">Changing the endpoint<a class="headerlink" href="#changing-the-endpoint" title="Permanent link">&para;</a></h2>
+<p>You can change the default production endpoint URL for testing purposes via <code class="codehilite"><span class="nx">Rebilly</span><span class="p">.</span><span class="nx">setEndpoint</span></code>. This must be done before the token is created to apply.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// using the sandbox endpoint</span>
+<span class="nx">Rebilly</span><span class="p">.</span><span class="nx">setEndpoint</span><span class="p">(</span><span class="s1">&#39;https://api-sandbox.rebilly.com/v2.1/tokens&#39;</span><span class="p">);</span>
+</pre></div>
+
 <h2 id="example-form">Example Form<a class="headerlink" href="#example-form" title="Permanent link">&para;</a></h2>
 <p>When combined together the most basic version of the page would look like the following example:
 <script src="https://gist.github.com/Teknologica/6d814f041428e5255df07cd2c60d1334.js"></script></p>
