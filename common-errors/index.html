@@ -18,7 +18,7 @@
     
     
       
-        <title>License - Rebilly JS Token Library</title>
+        <title>Common Errors - Rebilly JS Token Library</title>
       
     
     
@@ -82,7 +82,7 @@
             
               
             
-            License
+            Common Errors
           
         </span>
       </div>
@@ -225,18 +225,6 @@
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../common-errors/" title="Common Errors" class="md-nav__link">
-      Common Errors
-    </a>
-  </li>
-
-    
-      
-      
-      
-
   
 
 
@@ -247,10 +235,70 @@
       
     
     
-    <a href="./" title="License" class="md-nav__link md-nav__link--active">
-      License
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Common Errors
+      </label>
+    
+    <a href="./" title="Common Errors" class="md-nav__link md-nav__link--active">
+      Common Errors
     </a>
     
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#silent-error" title="Silent Error" class="md-nav__link">
+    Silent Error
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#400-bad-request" title="400 Bad Request" class="md-nav__link">
+    400 Bad Request
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#401-unauthorized" title="401 Unauthorized" class="md-nav__link">
+    401 Unauthorized
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missing-cors-headers" title="Missing CORS Headers" class="md-nav__link">
+    Missing CORS Headers
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../license/" title="License" class="md-nav__link">
+      License
+    </a>
   </li>
 
     
@@ -271,6 +319,41 @@
     
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#silent-error" title="Silent Error" class="md-nav__link">
+    Silent Error
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#400-bad-request" title="400 Bad Request" class="md-nav__link">
+    400 Bad Request
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#401-unauthorized" title="401 Unauthorized" class="md-nav__link">
+    401 Unauthorized
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missing-cors-headers" title="Missing CORS Headers" class="md-nav__link">
+    Missing CORS Headers
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -282,24 +365,35 @@
               
                 
                 
-                <h1 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h1>
-<p><strong>MIT License</strong></p>
-<p>Copyright (c) 2017, Rebilly, Inc.</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+                <h1 id="common-errors">Common Errors<a class="headerlink" href="#common-errors" title="Permanent link">&para;</a></h1>
+<p>The Rebilly JS Token library uses <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">CORS</a> for transmitting data from your form to the Rebilly API. This section lists the most common errors you might encounter while implementing it.</p>
+<h2 id="silent-error">Silent Error<a class="headerlink" href="#silent-error" title="Permanent link">&para;</a></h2>
+<p>Your endpoint URL is incorrect. See the API endpoint topic on how to set a new endpoint. Contact us if you are unsure about which URL to use.
+If the problem persists after changing the endpoint the error might be caused by <a href="#missing-cors-headers">missing headers</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Console Warning</p>
+<p><code class="codehilite">URL IS NOT ALLOWED BY ACCESS-CONTROL-ALLOW-ORIGIN</code></p>
+</div>
+<h2 id="400-bad-request">400 Bad Request<a class="headerlink" href="#400-bad-request" title="Permanent link">&para;</a></h2>
+<p>The server returned a network error. Check the server response for more information about the error. </p>
+<p>Most common cases:</p>
+<ul>
+<li><strong>Wrong endpoint/server:</strong> the CORS call was accepted but not understood by the remote server.</li>
+<li><strong>Correct endpoint/server:</strong> validation failed or a field is missing. Check response for details and see Handling Response topic for implementation.</li>
+</ul>
+<h2 id="401-unauthorized">401 Unauthorized<a class="headerlink" href="#401-unauthorized" title="Permanent link">&para;</a></h2>
+<p>The server acknowledges the CORS transmission but the authorization key is incorrect. Verify the API User and API Secret Key match the values defined for your account and update the signature generation logic.</p>
+<h2 id="missing-cors-headers">Missing CORS Headers<a class="headerlink" href="#missing-cors-headers" title="Permanent link">&para;</a></h2>
+<p>Rarely CORS requests will fail with a generic <code class="codehilite">not allowed by Access-Control-Allow-Origin</code> error while your endpoint is correctly set. This can happen if the required CORS headers are missing in either direction. </p>
+<div class="admonition warning">
+<p class="admonition-title">Firewalls</p>
+<p>Some enterprise firewalls will strip incoming and outgoing headers that have not been whitelisted. </p>
+</div>
+<p>The following headers must be supported over your network:</p>
+<div class="codehilite"><pre><span></span>Access-Control-Allow-Origin
+Access-Control-Allow-Headers
+Access-Control-Allow-Methods
+</pre></div>
                 
                   
                 
@@ -318,7 +412,7 @@ SOFTWARE.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../common-errors/" title="Common Errors" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../validation-tools/" title="Validation Tools" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -327,11 +421,25 @@ SOFTWARE.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Common Errors
+                Validation Tools
               </span>
             </div>
           </a>
         
+        
+          <a href="../license/" title="License" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                License
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>

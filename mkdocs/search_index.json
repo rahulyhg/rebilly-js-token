@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Rebilly JS Token Library\n\n\nRebilly.js powers your checkout form and removes the need to send sensitive customer information directly to your servers. Use the library to generate payment tokens to reduce the scope of PCI DSS compliance.\n\n\nRebilly API Spec\n\n\nThe library uses the payment token endpoint from the Rebilly API. See the \nRebilly API spec\n for more details. \n\n\nIncluding Rebilly.js\n\n\nAdd Rebilly.js to your page using one of the following CDN providers, preferably at the bottom before the \n/body\n. \n\n\n\n\nAlways use \nHTTPS\n when including the library.\n\n\n\n\nUNPKG CDN\n\n\nscript\n \nsrc\n=\nhttps://unpkg.com/rebilly-js-token/dist/rebilly.js\n/\nscript\n\n\n\n\n\njsDelivr CDN\n\n\nscript\n \nsrc\n=\nhttps://cdn.jsdelivr.net/npm/rebilly-js-token/dist/rebilly.min.js\n/\nscript\n\n\n\n\n\nSemver\n\n\nThe JS SDK is released following \nSemver 2.0.0\n guidelines. Each minor and patch version will be backward-compatible and incompatible changes will be introduced using major releases only.", 
+            "text": "Rebilly JS Token Library\n\n\nRebilly.js powers your checkout form and removes the need to send sensitive customer information directly to your servers. Use the library to generate payment tokens to reduce the scope of PCI DSS compliance.\n\n\n\n\n\n\n\n\nRebilly API Spec\n\n\nThe library uses the payment token endpoint from the Rebilly API. See the \nRebilly API spec\n for more details. \n\n\nIncluding Rebilly.js\n\n\nAdd Rebilly.js to your page using one of the following CDN providers, preferably at the bottom before the \n/body\n. \n\n\n\n\nAlways use \nHTTPS\n when including the library.\n\n\n\n\nUNPKG CDN\n\n\nscript\n \nsrc\n=\nhttps://unpkg.com/rebilly-js-token/dist/rebilly.js\n/\nscript\n\n\n\n\n\njsDelivr CDN\n\n\nscript\n \nsrc\n=\nhttps://cdn.jsdelivr.net/npm/rebilly-js-token/dist/rebilly.min.js\n/\nscript\n\n\n\n\n\nSemver\n\n\nThe JS SDK is released following \nSemver 2.0.0\n guidelines. Each minor and patch version will be backward-compatible and incompatible changes will be introduced using major releases only.", 
             "title": "Introduction"
         }, 
         {
@@ -64,6 +64,111 @@
             "location": "/getting-started/#example-form", 
             "text": "When combined together the most basic version of the page would look like the following example:", 
             "title": "Example Form"
+        }, 
+        {
+            "location": "/validation-tools/", 
+            "text": "Validation Tools\n\n\nThe JS library comes with a set of validation tools that can be used to verify the payment card and customer data. They can be accessed via the \nRebilly\n.\nvalidate\n namespace.\n\n\n\n\nOpt-In\n\n\nValidation is not used automatically on the client-side and is provided as an opt-in feature. \n\n\n\n\nPayment Card\n\n\nCredit card validation functions are found in the \nRebilly\n.\nvalidate\n.\ncard\n namespace. All functions return booleans.\n\n\nLuhn Algorithm\n\n\nThe Luhn Algorithm \nis a simple checksum formula used to validate a variety of identification numbers\n. This function expects only digits.\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nluhn\n(\n1131313\n);\n \n// false\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nluhn\n(\n4000111122223333\n);\n \n// false\n\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nluhn\n(\n4601398104203552\n);\n \n// true\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nluhn\n(\n4494590804949548\n);\n \n// true\n\n\n\n// the function will not strip dashes and spaces\n\n\n// and otherwise valid numbers will fail if passed with them\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nluhn\n(\n5349-2077-8395-2559\n);\n \n// false\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nluhn\n(\n5349207783952559\n);\n \n// true\n\n\n\n\n\nCard Number\n\n\nEnsures the card number is valid by checking the length and Luhn algorithm result. Spaces and dashes are ignored and can be passed along with the card number.\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncardNumber\n(\n4601398104203552\n);\n \n// true\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncardNumber\n(\n4494590804949548\n);\n \n// true\n\n\n\n// with spaces and dashes\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncardNumber\n(\n4494 5908 0494 9548\n);\n \n// true\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncardNumber\n(\n4494-5908-0494-9548\n);\n \n// true\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncardNumber\n(\n43-57-45-59-57-71-61-42\n);\n \n// true\n\n\n\n// illegal characters\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncardNumber\n(\n4357455AD#EE8\nEEAG\n);\n \n// false\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncardNumber\n(\n4838.2379.4185.1360\n);\n \n// false\n\n\n\n\n\nCard Expiry\n\n\nValidates the card's expiry month (mm) and year (yyyy). Only accepts digits as integers or strings.\n\n\n// invalid year format\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nexpiry\n(\n01\n,\n15\n);\n \n// false\n\n\n// digits only\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nexpiry\n(\njan\n,\n \n2014\n);\n \n// false\n\n\n// invalid month\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nexpiry\n(\n22\n,\n \n2022\n);\n \n// false\n\n\n// card expired\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nexpiry\n(\n11\n,\n \n2001\n);\n \n// false\n\n\n\n// digit as strings\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nexpiry\n(\n01\n,\n2015\n);\n \n// true\n\n\n// digits as integers\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nexpiry\n(\n1\n,\n \n2014\n);\n \n// true\n\n\n// mix of string and integer\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\nexpiry\n(\n04\n,\n \n2014\n);\n \n// true\n\n\n\n\n\nCVV\n\n\nValidates the card's CVV number and length. Only accepts digits as integer or string.\n\n\n// digits only\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncvv\n(\n1 2 3\n);\n \n// false\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncvv\n(\n1a3\n);\n \n// false\n\n\n// invalid length\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncvv\n(\n11111\n);\n \n// false\n\n\n\n// digit as string\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncvv\n(\n011\n);\n \n// true\n\n\n// digits as integers\n\n\nRebilly\n.\nvalidate\n.\ncard\n.\ncvv\n(\n123\n);\n \n// true\n\n\n\n\n\nCustomer (Billing Address)\n\n\nCustomer data validation functions are found in the \nRebilly\n.\nvalidate\n.\ncustomer\n namespace. All functions will return a boolean. \nLength restrictions are based on the Rebilly API specifications for each field.\n\n\n\n\nUnicode\n\n\nAll address related validation functions (firstName, lastName, address, city, region) are Unicode compatible.\n\n\n\n\nFirst Name\n\n\nValidates the firstName field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes \n, . \n -\n are allowed. Digits are not allowed.\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nfirstName\n(\nAndrei Theodorescu\n);\n \n//true\n\n\n//unicode\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nfirstName\n(\n\u30ab\u30a6\u30dc\u30fc\u30a4\u30d3\u30d0\u30c3\u30d7\n);\n \n//true\n\n\n\n//invalid characters\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nfirstName\n(\nRobert * Cloud\n);\n \n//false\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nfirstName\n(\nJebediah_Morrisson\n);\n \n//false\n\n\n\n\n\nLast Name\n\n\nValidates the lastName field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes \n, . \n -\n are allowed.\n\n\n//unicode\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nlastName\n(\n\ud6c8\ubbfc\uc815\uc74c \u8a13\u6c11\u6b63\u97f3\n);\n \n//true\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nlastName\n(\n\u0437\u0434\u0440\u0430\u0432\u043e \u0437\u0431\u043e\u0433\u0443\u043c\n);\n \n//true\n\n\n\n//with digits\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nlastName\n(\nDe 08 Laurentiis\n);\n \n//true\n\n\n\n//invalid characters\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nlastName\n(\nDe;Laurentiis\n);\n \n//false\n\n\n\n\n\nAddress\n\n\nCan be used to validate address and address2 fields. Maximum length of 60 unicode characters. \nCommas, periods, single quotes, dashes, hash signs, forward slashes and backslashes \n, . \n - / \\\n are allowed.\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\naddress\n(\n6745 Rue De Carufel\n);\n \n// true\n\n\n// unicode\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\naddress\n(\n012 Brunnenstra\u00dfe\n);\n \n// true\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\naddress\n(\n\u74b0\u4e03\u901a\u308a/\u90fd\u9053318\u53f7\u7dda\n);\n \n// true\n\n\n\n// invalid characters\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\naddress\n(\n012 Brunnenstra\u00dfe $*$\n*\n);\n \n// false\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\naddress\n(\nAftcastle, Berlin = 09:339:1\n);\n \n// false\n\n\n\n\n\nCity\n\n\nValidates the city field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes \n, . \n -\n are allowed.\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\ncity\n(\nPozdravljeni adijo\n);\n \n// true\n\n\n// invalid characters\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\ncity\n(\nPozdravljeni ++ adijo\n);\n \n// false\n\n\n\n\n\nRegion\n\n\nValidates the region field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes \n, . \n -\n are allowed.\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nregion\n(\nPozdravljeni adijo\n);\n \n// true\n\n\n// invalid characters\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nregion\n(\nPozdravljeni ++ adijo\n);\n \n// false\n\n\n\n\n\nPostal Code\n\n\nValidates the postalCode field. Maximum length of 10 characters. Only letters, digits, spaces and dashes are allowed.\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\npostalCode\n(\nh1n1n1\n);\n \n// true\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\npostalCode\n(\nh1n-1n1\n);\n \n// true\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\npostalCode\n(\nh2b 4g6\n);\n \n// true\n\n\n\n// invalid characters\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\npostalCode\n(\nh1n+1n1\n);\n \n// false\n\n\n\n\n\nPhone Number\n\n\nValidates the phoneNumber field. Maximum length of 20 characters. Only digits, parentheses, spaces and dashes are allowed. The international call prefix \n+\n can also be used.\n\n\n// string\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nphoneNumber\n(\n(514) 321-7654\n);\n \n// true\n\n\n// integer - not recommended\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nphoneNumber\n(\n5143217654\n);\n \n// true\n\n\n// international call prefix\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nphoneNumber\n(\n+01-800-4536\n);\n \n// true\n\n\n\n// invalid characters\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nphoneNumber\n(\n[514]-321-7654\n);\n \n// false\n\n\nRebilly\n.\nvalidate\n.\ncustomer\n.\nphoneNumber\n(\n1-800-CALL\n);\n \n// false", 
+            "title": "Validation Tools"
+        }, 
+        {
+            "location": "/validation-tools/#validation-tools", 
+            "text": "The JS library comes with a set of validation tools that can be used to verify the payment card and customer data. They can be accessed via the  Rebilly . validate  namespace.   Opt-In  Validation is not used automatically on the client-side and is provided as an opt-in feature.", 
+            "title": "Validation Tools"
+        }, 
+        {
+            "location": "/validation-tools/#payment-card", 
+            "text": "Credit card validation functions are found in the  Rebilly . validate . card  namespace. All functions return booleans.", 
+            "title": "Payment Card"
+        }, 
+        {
+            "location": "/validation-tools/#luhn-algorithm", 
+            "text": "The Luhn Algorithm  is a simple checksum formula used to validate a variety of identification numbers . This function expects only digits.  Rebilly . validate . card . luhn ( 1131313 );   // false  Rebilly . validate . card . luhn ( 4000111122223333 );   // false  Rebilly . validate . card . luhn ( 4601398104203552 );   // true  Rebilly . validate . card . luhn ( 4494590804949548 );   // true  // the function will not strip dashes and spaces  // and otherwise valid numbers will fail if passed with them  Rebilly . validate . card . luhn ( 5349-2077-8395-2559 );   // false  Rebilly . validate . card . luhn ( 5349207783952559 );   // true", 
+            "title": "Luhn Algorithm"
+        }, 
+        {
+            "location": "/validation-tools/#card-number", 
+            "text": "Ensures the card number is valid by checking the length and Luhn algorithm result. Spaces and dashes are ignored and can be passed along with the card number.  Rebilly . validate . card . cardNumber ( 4601398104203552 );   // true  Rebilly . validate . card . cardNumber ( 4494590804949548 );   // true  // with spaces and dashes  Rebilly . validate . card . cardNumber ( 4494 5908 0494 9548 );   // true  Rebilly . validate . card . cardNumber ( 4494-5908-0494-9548 );   // true  Rebilly . validate . card . cardNumber ( 43-57-45-59-57-71-61-42 );   // true  // illegal characters  Rebilly . validate . card . cardNumber ( 4357455AD#EE8 EEAG );   // false  Rebilly . validate . card . cardNumber ( 4838.2379.4185.1360 );   // false", 
+            "title": "Card Number"
+        }, 
+        {
+            "location": "/validation-tools/#card-expiry", 
+            "text": "Validates the card's expiry month (mm) and year (yyyy). Only accepts digits as integers or strings.  // invalid year format  Rebilly . validate . card . expiry ( 01 , 15 );   // false  // digits only  Rebilly . validate . card . expiry ( jan ,   2014 );   // false  // invalid month  Rebilly . validate . card . expiry ( 22 ,   2022 );   // false  // card expired  Rebilly . validate . card . expiry ( 11 ,   2001 );   // false  // digit as strings  Rebilly . validate . card . expiry ( 01 , 2015 );   // true  // digits as integers  Rebilly . validate . card . expiry ( 1 ,   2014 );   // true  // mix of string and integer  Rebilly . validate . card . expiry ( 04 ,   2014 );   // true", 
+            "title": "Card Expiry"
+        }, 
+        {
+            "location": "/validation-tools/#cvv", 
+            "text": "Validates the card's CVV number and length. Only accepts digits as integer or string.  // digits only  Rebilly . validate . card . cvv ( 1 2 3 );   // false  Rebilly . validate . card . cvv ( 1a3 );   // false  // invalid length  Rebilly . validate . card . cvv ( 11111 );   // false  // digit as string  Rebilly . validate . card . cvv ( 011 );   // true  // digits as integers  Rebilly . validate . card . cvv ( 123 );   // true", 
+            "title": "CVV"
+        }, 
+        {
+            "location": "/validation-tools/#customer-billing-address", 
+            "text": "Customer data validation functions are found in the  Rebilly . validate . customer  namespace. All functions will return a boolean. \nLength restrictions are based on the Rebilly API specifications for each field.   Unicode  All address related validation functions (firstName, lastName, address, city, region) are Unicode compatible.", 
+            "title": "Customer (Billing Address)"
+        }, 
+        {
+            "location": "/validation-tools/#first-name", 
+            "text": "Validates the firstName field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes  , .   -  are allowed. Digits are not allowed.  Rebilly . validate . customer . firstName ( Andrei Theodorescu );   //true  //unicode  Rebilly . validate . customer . firstName ( \u30ab\u30a6\u30dc\u30fc\u30a4\u30d3\u30d0\u30c3\u30d7 );   //true  //invalid characters  Rebilly . validate . customer . firstName ( Robert * Cloud );   //false  Rebilly . validate . customer . firstName ( Jebediah_Morrisson );   //false", 
+            "title": "First Name"
+        }, 
+        {
+            "location": "/validation-tools/#last-name", 
+            "text": "Validates the lastName field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes  , .   -  are allowed.  //unicode  Rebilly . validate . customer . lastName ( \ud6c8\ubbfc\uc815\uc74c \u8a13\u6c11\u6b63\u97f3 );   //true  Rebilly . validate . customer . lastName ( \u0437\u0434\u0440\u0430\u0432\u043e \u0437\u0431\u043e\u0433\u0443\u043c );   //true  //with digits  Rebilly . validate . customer . lastName ( De 08 Laurentiis );   //true  //invalid characters  Rebilly . validate . customer . lastName ( De;Laurentiis );   //false", 
+            "title": "Last Name"
+        }, 
+        {
+            "location": "/validation-tools/#address", 
+            "text": "Can be used to validate address and address2 fields. Maximum length of 60 unicode characters. \nCommas, periods, single quotes, dashes, hash signs, forward slashes and backslashes  , .   - / \\  are allowed.  Rebilly . validate . customer . address ( 6745 Rue De Carufel );   // true  // unicode  Rebilly . validate . customer . address ( 012 Brunnenstra\u00dfe );   // true  Rebilly . validate . customer . address ( \u74b0\u4e03\u901a\u308a/\u90fd\u9053318\u53f7\u7dda );   // true  // invalid characters  Rebilly . validate . customer . address ( 012 Brunnenstra\u00dfe $*$ * );   // false  Rebilly . validate . customer . address ( Aftcastle, Berlin = 09:339:1 );   // false", 
+            "title": "Address"
+        }, 
+        {
+            "location": "/validation-tools/#city", 
+            "text": "Validates the city field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes  , .   -  are allowed.  Rebilly . validate . customer . city ( Pozdravljeni adijo );   // true  // invalid characters  Rebilly . validate . customer . city ( Pozdravljeni ++ adijo );   // false", 
+            "title": "City"
+        }, 
+        {
+            "location": "/validation-tools/#region", 
+            "text": "Validates the region field. Maximum length of 45 unicode characters. Commas, periods, single quotes and dashes  , .   -  are allowed.  Rebilly . validate . customer . region ( Pozdravljeni adijo );   // true  // invalid characters  Rebilly . validate . customer . region ( Pozdravljeni ++ adijo );   // false", 
+            "title": "Region"
+        }, 
+        {
+            "location": "/validation-tools/#postal-code", 
+            "text": "Validates the postalCode field. Maximum length of 10 characters. Only letters, digits, spaces and dashes are allowed.  Rebilly . validate . customer . postalCode ( h1n1n1 );   // true  Rebilly . validate . customer . postalCode ( h1n-1n1 );   // true  Rebilly . validate . customer . postalCode ( h2b 4g6 );   // true  // invalid characters  Rebilly . validate . customer . postalCode ( h1n+1n1 );   // false", 
+            "title": "Postal Code"
+        }, 
+        {
+            "location": "/validation-tools/#phone-number", 
+            "text": "Validates the phoneNumber field. Maximum length of 20 characters. Only digits, parentheses, spaces and dashes are allowed. The international call prefix  +  can also be used.  // string  Rebilly . validate . customer . phoneNumber ( (514) 321-7654 );   // true  // integer - not recommended  Rebilly . validate . customer . phoneNumber ( 5143217654 );   // true  // international call prefix  Rebilly . validate . customer . phoneNumber ( +01-800-4536 );   // true  // invalid characters  Rebilly . validate . customer . phoneNumber ( [514]-321-7654 );   // false  Rebilly . validate . customer . phoneNumber ( 1-800-CALL );   // false", 
+            "title": "Phone Number"
+        }, 
+        {
+            "location": "/common-errors/", 
+            "text": "Common Errors\n\n\nThe Rebilly JS Token library uses \nCORS\n for transmitting data from your form to the Rebilly API. This section lists the most common errors you might encounter while implementing it.\n\n\nSilent Error\n\n\nYour endpoint URL is incorrect. See the API endpoint topic on how to set a new endpoint. Contact us if you are unsure about which URL to use.\nIf the problem persists after changing the endpoint the error might be caused by \nmissing headers\n.\n\n\n\n\nConsole Warning\n\n\nURL IS NOT ALLOWED BY ACCESS-CONTROL-ALLOW-ORIGIN\n\n\n\n\n400 Bad Request\n\n\nThe server returned a network error. Check the server response for more information about the error. \n\n\nMost common cases:\n\n\n\n\nWrong endpoint/server:\n the CORS call was accepted but not understood by the remote server.\n\n\nCorrect endpoint/server:\n validation failed or a field is missing. Check response for details and see Handling Response topic for implementation.\n\n\n\n\n401 Unauthorized\n\n\nThe server acknowledges the CORS transmission but the authorization key is incorrect. Verify the API User and API Secret Key match the values defined for your account and update the signature generation logic.\n\n\nMissing CORS Headers\n\n\nRarely CORS requests will fail with a generic \nnot allowed by Access-Control-Allow-Origin\n error while your endpoint is correctly set. This can happen if the required CORS headers are missing in either direction. \n\n\n\n\nFirewalls\n\n\nSome enterprise firewalls will strip incoming and outgoing headers that have not been whitelisted. \n\n\n\n\nThe following headers must be supported over your network:\n\n\nAccess-Control-Allow-Origin\nAccess-Control-Allow-Headers\nAccess-Control-Allow-Methods", 
+            "title": "Common Errors"
+        }, 
+        {
+            "location": "/common-errors/#common-errors", 
+            "text": "The Rebilly JS Token library uses  CORS  for transmitting data from your form to the Rebilly API. This section lists the most common errors you might encounter while implementing it.", 
+            "title": "Common Errors"
+        }, 
+        {
+            "location": "/common-errors/#silent-error", 
+            "text": "Your endpoint URL is incorrect. See the API endpoint topic on how to set a new endpoint. Contact us if you are unsure about which URL to use.\nIf the problem persists after changing the endpoint the error might be caused by  missing headers .   Console Warning  URL IS NOT ALLOWED BY ACCESS-CONTROL-ALLOW-ORIGIN", 
+            "title": "Silent Error"
+        }, 
+        {
+            "location": "/common-errors/#400-bad-request", 
+            "text": "The server returned a network error. Check the server response for more information about the error.   Most common cases:   Wrong endpoint/server:  the CORS call was accepted but not understood by the remote server.  Correct endpoint/server:  validation failed or a field is missing. Check response for details and see Handling Response topic for implementation.", 
+            "title": "400 Bad Request"
+        }, 
+        {
+            "location": "/common-errors/#401-unauthorized", 
+            "text": "The server acknowledges the CORS transmission but the authorization key is incorrect. Verify the API User and API Secret Key match the values defined for your account and update the signature generation logic.", 
+            "title": "401 Unauthorized"
+        }, 
+        {
+            "location": "/common-errors/#missing-cors-headers", 
+            "text": "Rarely CORS requests will fail with a generic  not allowed by Access-Control-Allow-Origin  error while your endpoint is correctly set. This can happen if the required CORS headers are missing in either direction.    Firewalls  Some enterprise firewalls will strip incoming and outgoing headers that have not been whitelisted.    The following headers must be supported over your network:  Access-Control-Allow-Origin\nAccess-Control-Allow-Headers\nAccess-Control-Allow-Methods", 
+            "title": "Missing CORS Headers"
         }, 
         {
             "location": "/license/", 
