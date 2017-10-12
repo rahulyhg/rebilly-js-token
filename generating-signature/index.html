@@ -18,7 +18,7 @@
     
     
       
-        <title>Common Errors - Rebilly JS Token Library</title>
+        <title>Generating a Signature - Rebilly JS Token Library</title>
       
     
     
@@ -82,7 +82,7 @@
             
               
             
-            Common Errors
+            Generating a Signature
           
         </span>
       </div>
@@ -214,11 +214,61 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../generating-signature/" title="Generating a Signature" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Generating a Signature
+      </label>
+    
+    <a href="./" title="Generating a Signature" class="md-nav__link md-nav__link--active">
       Generating a Signature
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#php-sdk" title="PHP SDK" class="md-nav__link">
+    PHP SDK
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#net-sdk" title=".NET SDK" class="md-nav__link">
+    .NET SDK
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#js-sdk-node" title="JS SDK (Node)" class="md-nav__link">
+    JS SDK (Node)
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -238,68 +288,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Common Errors
-      </label>
-    
-    <a href="./" title="Common Errors" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../common-errors/" title="Common Errors" class="md-nav__link">
       Common Errors
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#silent-error" title="Silent Error" class="md-nav__link">
-    Silent Error
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#400-bad-request" title="400 Bad Request" class="md-nav__link">
-    400 Bad Request
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#401-unauthorized" title="401 Unauthorized" class="md-nav__link">
-    401 Unauthorized
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#missing-cors-headers" title="Missing CORS Headers" class="md-nav__link">
-    Missing CORS Headers
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -336,29 +329,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#silent-error" title="Silent Error" class="md-nav__link">
-    Silent Error
+  <a href="#php-sdk" title="PHP SDK" class="md-nav__link">
+    PHP SDK
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#400-bad-request" title="400 Bad Request" class="md-nav__link">
-    400 Bad Request
+  <a href="#net-sdk" title=".NET SDK" class="md-nav__link">
+    .NET SDK
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#401-unauthorized" title="401 Unauthorized" class="md-nav__link">
-    401 Unauthorized
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#missing-cors-headers" title="Missing CORS Headers" class="md-nav__link">
-    Missing CORS Headers
+  <a href="#js-sdk-node" title="JS SDK (Node)" class="md-nav__link">
+    JS SDK (Node)
   </a>
   
 </li>
@@ -378,34 +364,45 @@
               
                 
                 
-                <h1 id="common-errors">Common Errors<a class="headerlink" href="#common-errors" title="Permanent link">&para;</a></h1>
-<p>The Rebilly JS Token library uses <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">CORS</a> for transmitting data from your form to the Rebilly API. This section lists the most common errors you might encounter while implementing it.</p>
-<h2 id="silent-error">Silent Error<a class="headerlink" href="#silent-error" title="Permanent link">&para;</a></h2>
-<p>Your endpoint URL is incorrect. See the <a href="../getting-started/#changing-the-endpoint">endpoint topic</a> on how to set a new endpoint. Contact us if you are unsure about which URL to use.
-If the problem persists after changing the endpoint the error might be caused by <a href="#missing-cors-headers">missing headers</a>.</p>
+                <h1 id="generating-a-signature">Generating a Signature<a class="headerlink" href="#generating-a-signature" title="Permanent link">&para;</a></h1>
+<p>To create a token you must first authenticate your requests using a signature. You can use one of the three official Rebilly SDKs to generate and inject it into the page containing the library.</p>
+<h2 id="php-sdk">PHP SDK<a class="headerlink" href="#php-sdk" title="Permanent link">&para;</a></h2>
+<p>The Rebilly SDK for PHP makes it easy for developers to access Rebilly REST APIs in their PHP code. You can get started in minutes by installing the SDK through Composer or by downloading a single zip file from the latest release.</p>
+<blockquote>
+<p>See the <a href="https://github.com/Rebilly/rebilly-php" target="_blank">Rebilly PHP SDK</a></p>
+</blockquote>
+<p><strong>Generate the signature</strong></p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$signature</span> <span class="o">=</span> <span class="nx">\Rebilly\Util\RebillySignature</span><span class="o">::</span><span class="na">generateSignature</span><span class="p">(</span>
+    <span class="nv">$apiUser</span><span class="p">,</span>
+    <span class="nv">$apiKey</span>
+<span class="p">);</span>
+</pre></div>
+
+<h2 id="net-sdk">.NET SDK<a class="headerlink" href="#net-sdk" title="Permanent link">&para;</a></h2>
+<p>The Rebilly NET SDK makes it easy for developers to access Rebilly REST APIs from their .NET code.</p>
+<blockquote>
+<p>See the <a href="https://github.com/Rebilly/Rebilly-NET-SDK" target="_blank">Rebilly .NET SDK</a></p>
+</blockquote>
+<p><strong>Generate the signature</strong></p>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="nn">Rebilly</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">NewSignature</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Signature</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">SignatureText</span> <span class="p">=</span> <span class="n">NewSignature</span><span class="p">.</span><span class="n">Generate</span><span class="p">(</span><span class="s">&quot;apiUser&quot;</span><span class="p">,</span> <span class="s">&quot;apiKey&quot;</span><span class="p">);</span>
+</pre></div>
+
+<h2 id="js-sdk-node">JS SDK (Node)<a class="headerlink" href="#js-sdk-node" title="Permanent link">&para;</a></h2>
+<p>The Rebilly JS SDK library allows you to consume the Rebilly API using either Node or the browser.</p>
 <div class="admonition warning">
-<p class="admonition-title">Console Warning</p>
-<p><code class="codehilite">URL IS NOT ALLOWED BY ACCESS-CONTROL-ALLOW-ORIGIN</code></p>
+<p class="admonition-title">Server-side Only</p>
+<p>You should use the signature generation method only on the server-side as it will otherwise expose your secret <code class="codehilite">apiKey</code> to the browser.</p>
 </div>
-<h2 id="400-bad-request">400 Bad Request<a class="headerlink" href="#400-bad-request" title="Permanent link">&para;</a></h2>
-<p>The server returned a network error. Check the server response for more information about the error. </p>
-<p>Most common cases:</p>
-<ul>
-<li><strong>Wrong endpoint/server:</strong> the CORS call was accepted but not understood by the remote server.</li>
-<li><strong>Correct endpoint/server:</strong> validation failed or a field is missing. Check response for details and see Handling Response topic for implementation.</li>
-</ul>
-<h2 id="401-unauthorized">401 Unauthorized<a class="headerlink" href="#401-unauthorized" title="Permanent link">&para;</a></h2>
-<p>The server acknowledges the CORS transmission but the authorization key is incorrect. Verify the API User and API Secret Key match the values defined for your account and update the signature generation logic.</p>
-<h2 id="missing-cors-headers">Missing CORS Headers<a class="headerlink" href="#missing-cors-headers" title="Permanent link">&para;</a></h2>
-<p>Rarely CORS requests will fail with a generic <code class="codehilite">not allowed by Access-Control-Allow-Origin</code> error while your endpoint is correctly set. This can happen if the required CORS headers are missing in either direction. </p>
-<div class="admonition warning">
-<p class="admonition-title">Firewalls</p>
-<p>Some enterprise firewalls will strip incoming and outgoing headers that have not been whitelisted. </p>
-</div>
-<p>The following headers must be supported over your network:</p>
-<div class="codehilite"><pre><span></span>Access-Control-Allow-Origin
-Access-Control-Allow-Headers
-Access-Control-Allow-Methods
+<blockquote>
+<p>See the <a href="https://github.com/Rebilly/rebilly-js-sdk" target="_blank">Rebilly JS SDK</a></p>
+</blockquote>
+<p><strong>Generate the signature</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">RebillyAPI</span><span class="p">({</span><span class="nx">apiKey</span><span class="p">});</span>
+<span class="kr">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">generateSignature</span><span class="p">({</span><span class="nx">apiUser</span><span class="p">,</span> <span class="nx">apiKey</span><span class="p">});</span> 
 </pre></div>
                 
                   
@@ -425,7 +422,7 @@ Access-Control-Allow-Methods
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../validation-tools/" title="Validation Tools" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../getting-started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -434,19 +431,19 @@ Access-Control-Allow-Methods
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Validation Tools
+                Getting Started
               </span>
             </div>
           </a>
         
         
-          <a href="../license/" title="License" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../validation-tools/" title="Validation Tools" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                License
+                Validation Tools
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
